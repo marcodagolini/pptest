@@ -28,11 +28,11 @@
  <script>
 	 
 	 
-	 
+var alreadyClicked = false;	 
 	
 
 	 	
-function offeredOrNot(data, eventInfo){
+function letsClick(data, eventInfo){
 	
 	console.log("data --> " + JSON.stringify(data));
 	console.log("eventInfo --> " + JSON.stringify(eventInfo));
@@ -40,6 +40,20 @@ function offeredOrNot(data, eventInfo){
 	setTimeout(function(){
 		$(".chips-item").trigger('click');
 	}, 1000);
+		
+}
+	 
+	 
+function offeredOrNot(data, eventInfo){
+	
+	if(alreadyClicked){
+		setTimeout(function(){
+			alreadyClicked = true;
+			$('.LPMcontainer').trigger( "click" );
+		}, 1000);
+	}
+	
+	
 		
 }	
 
@@ -78,8 +92,15 @@ window.onload = function() {
 	lpTag.events.bind({
 		eventName : "REQUEST_COMPLETE",
 		appName : "lp_monitoringSDK",
-		func: offeredOrNot,
+		func: letsClick,
 		triggerOnce : false
+	});
+	
+	lpTag.events.bind({
+		eventName: "OFFER_IMPRESSION",
+		appName: "LP_OFFERS",
+		func: offeredOrNot,
+		triggerOnce: false,
 	});
 
 
