@@ -45,7 +45,7 @@ function letsClick(data, eventInfo){
 	 
 function offeredOrNot(data, eventInfo){
 	
-	if(alreadyClicked){
+	if(!alreadyClicked){
 		setTimeout(function(){
 			alreadyClicked = true;
 			$('.LPMcontainer').trigger( "click" );
